@@ -1,0 +1,141 @@
+{
+    "cardiovascular": {
+        "beta_blockers": {
+            "metoprolol": {
+                "class": "Beta-1 Selective Blocker",
+                "indications": ["Hypertension", "Angina", "Heart Failure"],
+                "common_side_effects": ["Bradycardia", "Fatigue", "Dizziness"],
+                "nursing_considerations": [
+                    "Monitor heart rate and blood pressure",
+                    "Assess for signs of heart failure",
+                    "Do not discontinue abruptly"
+                ]
+            },
+            "carvedilol": {
+                "class": "Non-selective Beta Blocker",
+                "indications": ["Heart Failure", "Hypertension"],
+                "common_side_effects": ["Dizziness", "Fatigue", "Hypotension"],
+                "nursing_considerations": [
+                    "Monitor vital signs",
+                    "Take with food",
+                    "May mask symptoms of hypoglycemia"
+                ]
+            }
+        },
+        "ace_inhibitors": {
+            "lisinopril": {
+                "class": "ACE Inhibitor",
+                "indications": ["Hypertension", "Heart Failure", "Post-MI"],
+                "common_side_effects": ["Dry cough", "Hyperkalemia", "Dizziness"],
+                "nursing_considerations": [
+                    "Monitor potassium levels",
+                    "Check for angioedema",
+                    "Assess renal function"
+                ]
+            }
+        }
+    },
+    "respiratory": {
+        "bronchodilators": {
+            "albuterol": {
+                "class": "Short-acting Beta-2 Agonist",
+                "indications": ["Asthma", "COPD"],
+                "common_side_effects": ["Tremors", "Tachycardia", "Anxiety"],
+                "nursing_considerations": [
+                    "Assess breath sounds",
+                    "Monitor heart rate",
+                    "Teach proper inhaler technique"
+                ]
+            },
+            "ipratropium": {
+                "class": "Anticholinergic",
+                "indications": ["COPD", "Chronic Bronchitis"],
+                "common_side_effects": ["Dry mouth", "Cough", "Headache"],
+                "nursing_considerations": [
+                    "Monitor respiratory status",
+                    "Avoid getting in eyes",
+                    "May take 30-60 minutes for full effect"
+                ]
+            }
+        }
+    },
+    "antibiotics": {
+        "penicillins": {
+            "amoxicillin": {
+                "class": "Aminopenicillin",
+                "indications": ["Respiratory infections", "Ear infections", "Strep throat"],
+                "common_side_effects": ["Diarrhea", "Rash", "Nausea"],
+                "nursing_considerations": [
+                    "Assess for allergies",
+                    "Complete entire course",
+                    "May be taken with food"
+                ]
+            }
+        },
+        "cephalosporins": {
+            "ceftriaxone": {
+                "class": "Third-generation Cephalosporin",
+                "indications": ["Severe infections", "Meningitis", "Sepsis"],
+                "common_side_effects": ["Diarrhea", "Local injection site pain", "Rash"],
+                "nursing_considerations": [
+                    "Assess for cross-sensitivity with penicillins",
+                    "Monitor CBC",
+                    "Check compatibility before mixing"
+                ]
+            }
+        }
+    },
+    "pain_management": {
+        "opioids": {
+            "morphine": {
+                "class": "Opioid Analgesic",
+                "indications": ["Severe pain", "Post-operative pain"],
+                "common_side_effects": ["Constipation", "Respiratory depression", "Sedation"],
+                "nursing_considerations": [
+                    "Assess pain level",
+                    "Monitor respiratory rate",
+                    "Check sedation level",
+                    "Have naloxone available"
+                ]
+            }
+        },
+        "nsaids": {
+            "ibuprofen": {
+                "class": "NSAID",
+                "indications": ["Pain", "Fever", "Inflammation"],
+                "common_side_effects": ["GI upset", "Bleeding risk", "Renal effects"],
+                "nursing_considerations": [
+                    "Take with food",
+                    "Monitor for GI bleeding",
+                    "Check renal function"
+                ]
+            }
+        }
+    },
+    "diabetes": {
+        "insulin": {
+            "regular": {
+                "class": "Short-acting Insulin",
+                "onset": "30 minutes",
+                "peak": "2-3 hours",
+                "duration": "6-8 hours",
+                "nursing_considerations": [
+                    "Check blood glucose",
+                    "Administer 30 minutes before meals",
+                    "Rotate injection sites"
+                ]
+            },
+            "glargine": {
+                "class": "Long-acting Insulin",
+                "onset": "2 hours",
+                "peak": "No peak",
+                "duration": "24 hours",
+                "nursing_considerations": [
+                    "Give at same time daily",
+                    "Do not mix with other insulins",
+                    "Monitor for hypoglycemia"
+                ]
+            }
+        }
+    }
+} 

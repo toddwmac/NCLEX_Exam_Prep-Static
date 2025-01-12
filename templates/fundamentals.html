@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}Fundamentals of Nursing - NCLEX Exam Prep{% endblock %}
+
+{% block extra_css %}
+<style>
+    .nclex-tip {
+        background-color: #e7f3fe;
+        border-left: 4px solid #2196F3;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .priority-topic {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .practice-question {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    .mnemonic {
+        background-color: #d1e7dd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .section-header {
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 10px;
+        margin: 30px 0 20px 0;
+    }
+    .key-point {
+        background-color: #f8d7da;
+        border-left: 4px solid #dc3545;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .clinical-pearl {
+        background-color: #f0f7ff;
+        border: 1px solid #cce5ff;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col">
+            <h1 class="text-center mb-4">Fundamentals of Nursing</h1>
+
+            <div class="alert alert-info mb-4">
+                <h4><i class="bi bi-info-circle"></i> About This Guide</h4>
+                <p>This comprehensive guide covers essential nursing fundamentals you need to know for the NCLEX exam. Each section includes key concepts, practice questions, and clinical pearls.</p>
+            </div>
+
+            <h2>Nursing Process</h2>
+            <div class="mnemonic">
+                <h4>ADPIE Mnemonic</h4>
+                <ul>
+                    <li><strong>A</strong>ssessment - Collect and analyze patient data</li>
+                    <li><strong>D</strong>iagnosis - Identify actual/potential health problems</li>
+                    <li><strong>P</strong>lanning - Set goals and outcomes</li>
+                    <li><strong>I</strong>mplementation - Perform nursing interventions</li>
+                    <li><strong>E</strong>valuation - Measure effectiveness of care</li>
+                </ul>
+            </div>
+
+            <div class="practice-question">
+                <p><strong>Question:</strong> During which phase of the nursing process would the nurse establish measurable patient outcomes?</p>
+                <ol type="a">
+                    <li>Assessment</li>
+                    <li>Diagnosis</li>
+                    <li>Planning</li>
+                    <li>Implementation</li>
+                </ol>
+                <div class="mt-3">
+                    <strong>Answer:</strong> C - Planning
+                    <p><em>Rationale: The planning phase involves setting specific, measurable goals and expected outcomes for the patient.</em></p>
+                </div>
+            </div>
+
+            <h2>Vital Signs</h2>
+            <div class="key-point">
+                <h4>Normal Adult Ranges</h4>
+                <ul>
+                    <li>Temperature: 97.8°F - 99.1°F (36.5°C - 37.3°C)</li>
+                    <li>Pulse: 60-100 beats/minute</li>
+                    <li>Respirations: 12-20 breaths/minute</li>
+                    <li>Blood Pressure: 120/80 mmHg (normal adult)</li>
+                    <li>O2 Saturation: 95-100%</li>
+                </ul>
+            </div>
+
+            <div class="clinical-pearl">
+                <h4>Assessment Tips</h4>
+                <ul>
+                    <li>Count pulse and respirations for full 60 seconds if irregular</li>
+                    <li>Use appropriate BP cuff size</li>
+                    <li>Document position and site of measurements</li>
+                    <li>Note factors affecting readings (exercise, anxiety, medications)</li>
+                </ul>
+            </div>
+
+            <h2>Safety and Infection Control</h2>
+            <div class="priority-topic">
+                <h4>Standard Precautions</h4>
+                <ul>
+                    <li>Hand hygiene</li>
+                    <li>Personal protective equipment (PPE)</li>
+                    <li>Safe injection practices</li>
+                    <li>Respiratory hygiene/cough etiquette</li>
+                    <li>Clean and disinfected environmental surfaces</li>
+                </ul>
+            </div>
+
+            <div class="nclex-tip">
+                <h4>Hand Hygiene Moments</h4>
+                <p>Remember the WHO's 5 moments for hand hygiene:</p>
+                <ol>
+                    <li>Before patient contact</li>
+                    <li>Before aseptic procedure</li>
+                    <li>After body fluid exposure</li>
+                    <li>After patient contact</li>
+                    <li>After contact with patient surroundings</li>
+                </ol>
+            </div>
+
+            <h2>Basic Care and Comfort</h2>
+            <div class="clinical-pearl">
+                <h4>Activities of Daily Living (ADLs)</h4>
+                <ul>
+                    <li>Bathing and hygiene</li>
+                    <li>Dressing and grooming</li>
+                    <li>Eating and drinking</li>
+                    <li>Toileting</li>
+                    <li>Mobility and transfers</li>
+                </ul>
+            </div>
+
+            <div class="practice-question">
+                <p><strong>Question:</strong> A nurse is caring for a patient who requires assistance with bathing. Which action should the nurse implement first?</p>
+                <ol type="a">
+                    <li>Begin washing the patient's face</li>
+                    <li>Assess the patient's ability to participate</li>
+                    <li>Fill the basin with water</li>
+                    <li>Remove the patient's gown</li>
+                </ol>
+                <div class="mt-3">
+                    <strong>Answer:</strong> B - Assess the patient's ability to participate
+                    <p><em>Rationale: Assessment should always be the first step to determine the level of assistance needed and promote patient independence.</em></p>
+                </div>
+            </div>
+
+            <h2>Documentation</h2>
+            <div class="key-point">
+                <h4>Documentation Principles</h4>
+                <ul>
+                    <li>Be objective, accurate, and timely</li>
+                    <li>Use approved abbreviations</li>
+                    <li>Document in chronological order</li>
+                    <li>Never alter or destroy records</li>
+                    <li>Follow facility policies</li>
+                </ul>
+            </div>
+
+            <div class="nclex-tip">
+                <h4>SBAR Communication</h4>
+                <ul>
+                    <li><strong>S</strong>ituation - What is happening now?</li>
+                    <li><strong>B</strong>ackground - What led up to this?</li>
+                    <li><strong>A</strong>ssessment - What do you think is going on?</li>
+                    <li><strong>R</strong>ecommendation - What should be done?</li>
+                </ul>
+            </div>
+
+            <h2>Medication Administration</h2>
+            <div class="priority-topic">
+                <h4>Rights of Medication Administration</h4>
+                <ul>
+                    <li>Right patient</li>
+                    <li>Right medication</li>
+                    <li>Right dose</li>
+                    <li>Right route</li>
+                    <li>Right time</li>
+                    <li>Right documentation</li>
+                    <li>Right to refuse</li>
+                    <li>Right assessment</li>
+                    <li>Right education</li>
+                    <li>Right evaluation</li>
+                </ul>
+            </div>
+
+            <div class="practice-question">
+                <p><strong>Question:</strong> A nurse is preparing to administer medications. Which of the "rights" of medication administration is being followed when the nurse checks the patient's allergy bracelet?</p>
+                <ol type="a">
+                    <li>Right patient</li>
+                    <li>Right assessment</li>
+                    <li>Right medication</li>
+                    <li>Right documentation</li>
+                </ol>
+                <div class="mt-3">
+                    <strong>Answer:</strong> B - Right assessment
+                    <p><em>Rationale: Checking the allergy bracelet is part of the assessment process to ensure safe medication administration.</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

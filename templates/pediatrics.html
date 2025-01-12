@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block title %}Pediatric Nursing - NCLEX Exam Prep{% endblock %}
+
+{% block extra_css %}
+<style>
+    .nclex-tip {
+        background-color: #e7f3fe;
+        border-left: 4px solid #2196F3;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .priority-topic {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .practice-question {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    .mnemonic {
+        background-color: #d1e7dd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .section-header {
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 10px;
+        margin: 30px 0 20px 0;
+    }
+    .key-point {
+        background-color: #f8d7da;
+        border-left: 4px solid #dc3545;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .clinical-pearl {
+        background-color: #f0f7ff;
+        border: 1px solid #cce5ff;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    .assessment-table {
+        width: 100%;
+        margin: 15px 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .assessment-table th {
+        background-color: #0d6efd;
+        color: white;
+        padding: 12px;
+    }
+    .assessment-table td {
+        padding: 10px;
+        border: 1px solid #dee2e6;
+    }
+    .assessment-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col">
+            <h1 class="text-center mb-4">Pediatric Nursing</h1>
+
+            <div class="alert alert-info mb-4">
+                <h4><i class="bi bi-info-circle"></i> About This Guide</h4>
+                <p>This guide focuses on high-priority NCLEX topics in pediatric nursing and includes practice questions for each section. Master these concepts to provide safe and effective care to pediatric patients.</p>
+            </div>
+
+            <h2>Growth & Development</h2>
+            <div class="clinical-pearl">
+                <h4>Key Developmental Milestones</h4>
+                <p>Understanding normal growth and development is crucial for identifying delays and providing age-appropriate care.</p>
+            </div>
+            <div class="assessment-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Age</th>
+                            <th>Motor Skills</th>
+                            <th>Language</th>
+                            <th>Social/Cognitive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2 months</td>
+                            <td>Lifts head during tummy time</td>
+                            <td>Coos, gurgles</td>
+                            <td>Smiles at faces</td>
+                        </tr>
+                        <tr>
+                            <td>6 months</td>
+                            <td>Sits without support</td>
+                            <td>Babbles</td>
+                            <td>Knows familiar faces</td>
+                        </tr>
+                        <tr>
+                            <td>12 months</td>
+                            <td>Walks with assistance</td>
+                            <td>1-2 words</td>
+                            <td>Plays peek-a-boo</td>
+                        </tr>
+                        <tr>
+                            <td>2 years</td>
+                            <td>Runs, climbs stairs</td>
+                            <td>2-word phrases</td>
+                            <td>Parallel play</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Assessment</h2>
+            <div class="priority-topic">
+                <h4>Assessment Sequence</h4>
+                <p>Remember to use age-appropriate techniques and involve the family:</p>
+                <ol>
+                    <li>Observe before touching</li>
+                    <li>Use distraction techniques</li>
+                    <li>Start with least invasive assessments</li>
+                    <li>Save painful procedures for last</li>
+                </ol>
+            </div>
+            <div class="assessment-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Vital Sign</th>
+                            <th>Age-Specific Considerations</th>
+                            <th>Normal Ranges</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Heart Rate</td>
+                            <td>Varies significantly by age</td>
+                            <td>Newborn: 120-160<br>Child: 70-120</td>
+                        </tr>
+                        <tr>
+                            <td>Respiratory Rate</td>
+                            <td>Count for full minute</td>
+                            <td>Newborn: 30-60<br>Child: 20-30</td>
+                        </tr>
+                        <tr>
+                            <td>Blood Pressure</td>
+                            <td>Use appropriate cuff size</td>
+                            <td>Varies by age and size</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Common Conditions</h2>
+            <div class="priority-topic">
+                <h4>High-Priority Conditions</h4>
+                <ul>
+                    <li>Respiratory: Asthma, Bronchiolitis, Croup</li>
+                    <li>Infectious: Otitis Media, Chickenpox, Meningitis</li>
+                    <li>Gastrointestinal: Gastroenteritis, Appendicitis</li>
+                    <li>Developmental: ADHD, Autism Spectrum Disorders</li>
+                </ul>
+            </div>
+            <div class="practice-question">
+                <p><strong>Question:</strong> A 2-year-old presents with barking cough and inspiratory stridor. Which condition should the nurse suspect?</p>
+                <ol type="a">
+                    <li>Pneumonia</li>
+                    <li>Asthma</li>
+                    <li>Croup</li>
+                    <li>Bronchiolitis</li>
+                </ol>
+                <div class="mt-3">
+                    <strong>Answer:</strong> C - Croup
+                    <p><em>Rationale: Barking cough and inspiratory stridor are classic symptoms of croup (laryngotracheobronchitis).</em></p>
+                </div>
+            </div>
+
+            <h2>Medications</h2>
+            <div class="key-point">
+                <h4>Medication Safety</h4>
+                <ul>
+                    <li>Always calculate doses based on weight (kg)</li>
+                    <li>Double-check all calculations</li>
+                    <li>Use appropriate delivery methods for age</li>
+                    <li>Monitor closely for side effects</li>
+                </ul>
+            </div>
+            <div class="mnemonic">
+                <h4>Common Calculations</h4>
+                <p>Weight-based dosing: mg/kg/dose or mg/kg/day</p>
+                <ul>
+                    <li>Convert weight to kg (divide pounds by 2.2)</li>
+                    <li>Calculate single dose</li>
+                    <li>Check maximum dose limits</li>
+                </ul>
+            </div>
+
+            <h2>Family-Centered Care</h2>
+            <div class="clinical-pearl">
+                <h4>Key Principles</h4>
+                <p>Family-centered care recognizes the family as constant in the child's life and essential to care planning.</p>
+            </div>
+            <div class="priority-topic">
+                <h4>Implementation Strategies</h4>
+                <ul>
+                    <li>Include family in care planning</li>
+                    <li>Provide education and support</li>
+                    <li>Respect cultural values</li>
+                    <li>Promote parent-child bonding</li>
+                    <li>Support siblings and extended family</li>
+                </ul>
+            </div>
+            <div class="practice-question">
+                <p><strong>Question:</strong> Which nursing action best demonstrates family-centered care?</p>
+                <ol type="a">
+                    <li>Limiting visiting hours to protect the child</li>
+                    <li>Making decisions without consulting parents</li>
+                    <li>Including parents in daily rounds and care planning</li>
+                    <li>Restricting sibling visits</li>
+                </ol>
+                <div class="mt-3">
+                    <strong>Answer:</strong> C - Including parents in daily rounds and care planning
+                    <p><em>Rationale: Including parents in rounds and care planning recognizes them as essential partners in their child's care.</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

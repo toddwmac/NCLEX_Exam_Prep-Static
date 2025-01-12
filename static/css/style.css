@@ -1,0 +1,234 @@
+/* Aspen University Color Scheme */
+:root {
+    --aspen-blue: #003057;
+    --aspen-light-blue: #0077C8;
+    --aspen-gray: #58595B;
+    --aspen-light-gray: #F4F4F4;
+    --aspen-white: #FFFFFF;
+    --aspen-accent: #FFB81C;
+}
+
+/* Main Styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--aspen-gray);
+    background-color: var(--aspen-white);
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--aspen-blue);
+    font-weight: 600;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--aspen-blue) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--aspen-white);
+    font-weight: 500;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--aspen-accent);
+}
+
+.navbar-brand img {
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+    /* Prevent blurry scaling on high-DPI displays */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Cards */
+.card {
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card-title {
+    color: var(--aspen-blue);
+    font-weight: 600;
+}
+
+.card-header {
+    background-color: var(--aspen-blue);
+    color: var(--aspen-white);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--aspen-light-blue);
+    border-color: var(--aspen-light-blue);
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    border-radius: 25px;
+}
+
+.btn-primary:hover {
+    background-color: var(--aspen-blue);
+    border-color: var(--aspen-blue);
+}
+
+.btn-secondary {
+    background-color: var(--aspen-gray);
+    border-color: var(--aspen-gray);
+    border-radius: 25px;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--aspen-blue) !important;
+    color: var(--aspen-white);
+    margin-top: auto;
+    padding: 2rem 0;
+}
+
+.footer .text-muted {
+    color: var(--aspen-white) !important;
+}
+
+/* Practice Questions */
+.options-container .form-check {
+    padding: 1rem;
+    background-color: var(--aspen-light-gray);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.options-container .form-check:hover {
+    background-color: #E8E8E8;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: var(--aspen-blue);
+    font-weight: 500;
+}
+
+/* Alerts and Feedback */
+.alert-success {
+    background-color: #DFF0D8;
+    border-color: #D6E9C6;
+    color: #3C763D;
+}
+
+.alert-danger {
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+    color: #A94442;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--aspen-blue);
+    color: var(--aspen-white);
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+    background-image: linear-gradient(rgba(0, 48, 87, 0.9), rgba(0, 48, 87, 0.9)), url('/static/images/nursing-hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-section h1 {
+    color: var(--aspen-white);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section .lead {
+    color: var(--aspen-accent);
+    font-size: 1.25rem;
+}
+
+/* List Groups */
+.list-group-item {
+    border: none;
+    background-color: var(--aspen-light-gray);
+    margin-bottom: 0.5rem;
+    border-radius: 8px !important;
+}
+
+.list-group-item-action:hover {
+    background-color: #E8E8E8;
+}
+
+/* Badges */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background-color: var(--aspen-light-blue) !important;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .lead {
+        font-size: 1.1rem;
+    }
+
+    .hero-section {
+        padding: 2rem 0;
+    }
+}
+
+/* Study guide header logo */
+.header .logo {
+    max-height: 60px;
+    width: auto;
+    object-fit: contain;
+    /* Ensure smooth scaling */
+    transition: transform 0.2s ease;
+}
+
+/* Ensure logos don't overflow on very small screens */
+@media (max-width: 360px) {
+    .navbar-brand img {
+        max-height: 30px;
+    }
+    .header .logo {
+        max-height: 45px;
+    }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .navbar-brand img,
+    .header .logo {
+        image-rendering: auto;
+    }
+} 

@@ -1,0 +1,827 @@
+{% extends "base.html" %}
+
+{% block title %}Medical-Surgical Nursing - NCLEX Exam Prep{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Modern Color Palette */
+    :root {
+        --primary: #2196F3;
+        --primary-light: #e3f2fd;
+        --secondary: #ff9800;
+        --success: #4caf50;
+        --danger: #f44336;
+        --warning: #ffc107;
+        --info: #00bcd4;
+        --gray: #607d8b;
+        --light-gray: #f5f5f5;
+        --dark: #263238;
+        --cardio: #ff4081;
+        --resp: #2196F3;
+        --neuro: #9c27b0;
+        --gi: #4caf50;
+        --renal: #00bcd4;
+    }
+
+    /* Typography and Base Styles */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Roboto', sans-serif;
+        color: var(--dark);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid var(--primary-light);
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--dark);
+        padding: 1rem;
+        background: linear-gradient(to right, var(--primary-light), transparent);
+        border-radius: 8px;
+        margin-top: 3rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* System-specific styles */
+    .system-section {
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        position: relative;
+    }
+
+    .cardio-section { border-left: 5px solid var(--cardio); }
+    .resp-section { border-left: 5px solid var(--resp); }
+    .neuro-section { border-left: 5px solid var(--neuro); }
+    .gi-section { border-left: 5px solid var(--gi); }
+    .renal-section { border-left: 5px solid var(--renal); }
+
+    /* Component Styles */
+    .nclex-tip {
+        background: linear-gradient(135deg, var(--primary-light), white);
+        border-left: 4px solid var(--primary);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .priority-topic {
+        background: linear-gradient(135deg, #fff3e0, white);
+        border-left: 4px solid var(--warning);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .practice-question {
+        background-color: white;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 25px 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border: 1px solid #e0e0e0;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .practice-question:hover {
+        transform: translateY(-2px);
+    }
+
+    .mnemonic {
+        background: linear-gradient(135deg, #e8f5e9, white);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px solid var(--success);
+    }
+
+    .clinical-pearl {
+        background: linear-gradient(135deg, #e1f5fe, white);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px solid var(--info);
+    }
+
+    /* Navigation and Progress */
+    .progress-indicator {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+        padding: 15px;
+        background: var(--light-gray);
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .progress-step {
+        text-align: center;
+        position: relative;
+        flex: 1;
+        padding: 10px;
+    }
+
+    .progress-step i {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: var(--primary);
+    }
+
+    .progress-step::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary-light);
+    }
+
+    .progress-step:last-child::after {
+        display: none;
+    }
+
+    /* Topic Tags */
+    .topic-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 1rem 0;
+    }
+
+    .topic-tag {
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.875rem;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .tag-priority { background-color: var(--danger); }
+    .tag-assessment { background-color: var(--primary); }
+    .tag-intervention { background-color: var(--success); }
+    .tag-medication { background-color: var(--warning); }
+
+    /* System Icons */
+    .system-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: var(--primary);
+    }
+
+    /* Tables */
+    .assessment-table {
+        width: 100%;
+        margin: 20px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .assessment-table th {
+        background: linear-gradient(135deg, var(--primary), #1976d2);
+        color: white;
+        padding: 15px;
+    }
+
+    .assessment-table td {
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .assessment-table tr:nth-child(even) {
+        background-color: var(--light-gray);
+    }
+
+    /* Print Styles */
+    @media print {
+        .system-section {
+            break-inside: avoid;
+        }
+        
+        .assessment-table th {
+            background-color: #f5f5f5 !important;
+            color: #000 !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>
+                <i class="fas fa-stethoscope me-2"></i>
+                Medical-Surgical Nursing
+            </h1>
+
+            <div class="progress-indicator">
+                <div class="progress-step">
+                    <i class="fas fa-heart"></i>
+                    <div>Cardiovascular</div>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-lungs"></i>
+                    <div>Respiratory</div>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-brain"></i>
+                    <div>Neurological</div>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-stomach"></i>
+                    <div>Gastrointestinal</div>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-kidneys"></i>
+                    <div>Renal</div>
+                </div>
+            </div>
+
+            <div class="alert alert-info mb-4">
+                <h4><i class="bi bi-info-circle me-2"></i>About This Guide</h4>
+                <p>This comprehensive guide focuses on high-priority NCLEX topics in medical-surgical nursing. Each section includes key assessments, interventions, pharmacology, lab values, and practice questions to help you master complex patient care scenarios.</p>
+            </div>
+
+            <div class="system-section resp-section">
+                <h2>
+                    <i class="fas fa-lungs system-icon"></i>
+                    Respiratory System
+                </h2>
+
+                <div class="topic-tags">
+                    <span class="topic-tag tag-priority">
+                        <i class="fas fa-exclamation-circle"></i>
+                        High Priority
+                    </span>
+                    <span class="topic-tag tag-assessment">
+                        <i class="fas fa-microscope"></i>
+                        ABG Analysis
+                    </span>
+                    <span class="topic-tag tag-intervention">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        Interventions
+                    </span>
+                </div>
+
+                <div class="nclex-tip">
+                    <h4><i class="fas fa-lightbulb me-2"></i>NCLEX Focus</h4>
+                    <p>Respiratory topics are fundamental to NCLEX success because:</p>
+                    <ul>
+                        <li>Airway management is the first priority in patient care</li>
+                        <li>Respiratory distress requires rapid assessment and intervention</li>
+                        <li>Oxygenation affects all body systems</li>
+                        <li>Many interventions require critical thinking and clinical judgment</li>
+                    </ul>
+                    <p><strong>Key Testing Areas:</strong></p>
+                    <ul>
+                        <li>Assessment of respiratory status and work of breathing</li>
+                        <li>Interpretation of arterial blood gases (ABGs)</li>
+                        <li>Management of oxygen delivery devices</li>
+                        <li>Care of patients with chronic respiratory conditions</li>
+                    </ul>
+                </div>
+
+                <div class="quick-reference">
+                    <h4><i class="fas fa-clipboard-list me-2"></i>Quick Reference Summary</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Priority Assessments</h5>
+                            <ul>
+                                <li>Respiratory rate & pattern</li>
+                                <li>Breath sounds & work of breathing</li>
+                                <li>SpO2 & ABG values</li>
+                                <li>Sputum characteristics</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Critical Lab Values</h5>
+                            <ul>
+                                <li>PaO2 < 60 mmHg</li>
+                                <li>PaCO2 > 50 mmHg</li>
+                                <li>pH < 7.35 or > 7.45</li>
+                                <li>SpO2 < 90%</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Key Medications</h5>
+                            <ul>
+                                <li>Bronchodilators</li>
+                                <li>Corticosteroids</li>
+                                <li>Mucolytics</li>
+                                <li>Antibiotics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pharmacology">
+                    <h4><i class="fas fa-pills me-2"></i>Respiratory Pharmacology</h4>
+                    <div class="assessment-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Drug Class</th>
+                                    <th>Common Drugs</th>
+                                    <th>Key Nursing Considerations</th>
+                                    <th>Priority Side Effects</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Short-Acting Beta Agonists (SABA)</td>
+                                    <td>albuterol, levalbuterol</td>
+                                    <td>Monitor HR, tremors; rinse mouth after inhaled steroids</td>
+                                    <td>Tachycardia, anxiety, tremors</td>
+                                </tr>
+                                <tr>
+                                    <td>Inhaled Corticosteroids</td>
+                                    <td>fluticasone, budesonide</td>
+                                    <td>Rinse mouth after use; monitor for oral thrush</td>
+                                    <td>Oral thrush, hoarseness</td>
+                                </tr>
+                                <tr>
+                                    <td>Anticholinergics</td>
+                                    <td>ipratropium, tiotropium</td>
+                                    <td>Monitor for dry mouth; assess heart rate</td>
+                                    <td>Dry mouth, urinary retention</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="clinical-pearl">
+                    <h4><i class="fas fa-flask me-2"></i>ABG Interpretation Guide</h4>
+                    <div class="assessment-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Condition</th>
+                                    <th>pH</th>
+                                    <th>PaCO2</th>
+                                    <th>HCO3</th>
+                                    <th>Clinical Presentation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Respiratory Acidosis</td>
+                                    <td>< 7.35</td>
+                                    <td>↑</td>
+                                    <td>Normal/↑</td>
+                                    <td>Drowsiness, confusion, headache</td>
+                                </tr>
+                                <tr>
+                                    <td>Respiratory Alkalosis</td>
+                                    <td>> 7.45</td>
+                                    <td>↓</td>
+                                    <td>Normal/↓</td>
+                                    <td>Lightheadedness, tingling, tetany</td>
+                                </tr>
+                                <tr>
+                                    <td>Metabolic Acidosis</td>
+                                    <td>< 7.35</td>
+                                    <td>Normal/↓</td>
+                                    <td>↓</td>
+                                    <td>Kussmaul breathing, weakness</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mnemonic">
+                    <h4><i class="fas fa-brain me-2"></i>NCLEX Success Mnemonics</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>COPD vs. Asthma (COLD vs. WARM)</h5>
+                            <ul>
+                                <li><strong>C</strong>hronic symptoms vs. <strong>W</strong>heezing</li>
+                                <li><strong>O</strong>lder adults vs. <strong>A</strong>llergies common</li>
+                                <li><strong>L</strong>imited reversibility vs. <strong>R</strong>eversible</li>
+                                <li><strong>D</strong>aily symptoms vs. <strong>M</strong>ostly episodic</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>ABG Steps (ROME)</h5>
+                            <ul>
+                                <li><strong>R</strong>espiratory or Metabolic?</li>
+                                <li><strong>O</strong>pposites (pH and primary disorder)</li>
+                                <li><strong>M</strong>atch (compensation)</li>
+                                <li><strong>E</strong>valuate degree of compensation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4><i class="fas fa-question-circle me-2"></i>Clinical Application</h4>
+                    <p><strong>Question:</strong> A patient with COPD has the following ABG values: pH 7.30, PaCO2 55 mmHg, HCO3 28 mEq/L, PaO2 58 mmHg. Which interpretation is correct?</p>
+                    <ol type="a">
+                        <li>Uncompensated respiratory acidosis</li>
+                        <li>Partially compensated respiratory acidosis</li>
+                        <li>Metabolic acidosis with respiratory compensation</li>
+                        <li>Mixed acid-base disorder</li>
+                    </ol>
+                    <div class="mt-3">
+                        <strong>Answer:</strong> B - Partially compensated respiratory acidosis
+                        <p><em>Rationale: The elevated PaCO2 indicates respiratory acidosis (primary disorder). The slightly elevated HCO3 shows partial metabolic compensation. This pattern is common in COPD patients.</em></p>
+                    </div>
+                </div>
+
+                <div class="care-plan">
+                    <h4><i class="fas fa-clipboard-check me-2"></i>Nursing Care Plan: Acute Respiratory Distress</h4>
+                    <div class="assessment-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nursing Diagnosis</th>
+                                    <th>Interventions</th>
+                                    <th>Expected Outcomes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ineffective Breathing Pattern</td>
+                                    <td>
+                                        <ul>
+                                            <li>Position for optimal breathing</li>
+                                            <li>Teach pursed-lip breathing</li>
+                                            <li>Administer oxygen as ordered</li>
+                                            <li>Monitor respiratory status</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Normal respiratory rate and depth</li>
+                                            <li>Improved oxygen saturation</li>
+                                            <li>Decreased work of breathing</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Anxiety</td>
+                                    <td>
+                                        <ul>
+                                            <li>Provide calm environment</li>
+                                            <li>Teach relaxation techniques</li>
+                                            <li>Explain all procedures</li>
+                                            <li>Stay with patient</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Reduced anxiety level</li>
+                                            <li>Improved breathing control</li>
+                                            <li>Better coping mechanisms</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="system-section neuro-section">
+                <h2>
+                    <i class="fas fa-brain system-icon"></i>
+                    Neurological System
+                </h2>
+
+                <div class="topic-tags">
+                    <span class="topic-tag tag-priority">
+                        <i class="fas fa-exclamation-circle"></i>
+                        High Priority
+                    </span>
+                    <span class="topic-tag tag-assessment">
+                        <i class="fas fa-stethoscope"></i>
+                        Neuro Assessment
+                    </span>
+                    <span class="topic-tag tag-intervention">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        Critical Care
+                    </span>
+                </div>
+
+                <div class="nclex-tip">
+                    <h4><i class="fas fa-lightbulb me-2"></i>NCLEX Focus</h4>
+                    <p>Neurological assessment is crucial for NCLEX because:</p>
+                    <ul>
+                        <li>Changes in neurological status can indicate life-threatening conditions</li>
+                        <li>Early recognition of deterioration is essential for patient outcomes</li>
+                        <li>Neurological assessment requires systematic approach and critical thinking</li>
+                        <li>Many medications affect neurological function</li>
+                    </ul>
+                    <p><strong>Key Testing Areas:</strong></p>
+                    <ul>
+                        <li>Glasgow Coma Scale assessment</li>
+                        <li>Stroke assessment and interventions</li>
+                        <li>Increased intracranial pressure management</li>
+                        <li>Seizure precautions and management</li>
+                    </ul>
+                </div>
+
+                <div class="quick-reference">
+                    <h4><i class="fas fa-clipboard-list me-2"></i>Quick Reference Summary</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Priority Assessments</h5>
+                            <ul>
+                                <li>Level of consciousness</li>
+                                <li>Pupillary response</li>
+                                <li>Motor strength</li>
+                                <li>Cranial nerve function</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Warning Signs</h5>
+                            <ul>
+                                <li>Decreased LOC</li>
+                                <li>Unequal pupils</li>
+                                <li>New onset seizures</li>
+                                <li>Severe headache</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Key Medications</h5>
+                            <ul>
+                                <li>Anticonvulsants</li>
+                                <li>Mannitol</li>
+                                <li>tPA</li>
+                                <li>Antipsychotics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mnemonic">
+                    <h4><i class="fas fa-brain me-2"></i>Stroke Assessment (FAST)</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>FAST Assessment</h5>
+                            <ul>
+                                <li><strong>F</strong>acial drooping</li>
+                                <li><strong>A</strong>rm weakness</li>
+                                <li><strong>S</strong>peech difficulties</li>
+                                <li><strong>T</strong>ime to call emergency services</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Additional Signs</h5>
+                            <ul>
+                                <li>Sudden confusion</li>
+                                <li>Vision problems</li>
+                                <li>Severe headache</li>
+                                <li>Balance problems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pharmacology">
+                    <h4><i class="fas fa-pills me-2"></i>Neurological Pharmacology</h4>
+                    <div class="assessment-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Drug Class</th>
+                                    <th>Common Drugs</th>
+                                    <th>Key Nursing Considerations</th>
+                                    <th>Priority Side Effects</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Anticonvulsants</td>
+                                    <td>phenytoin, levetiracetam</td>
+                                    <td>Monitor drug levels, assess gait</td>
+                                    <td>Drowsiness, ataxia, gingival hyperplasia</td>
+                                </tr>
+                                <tr>
+                                    <td>Osmotic Diuretics</td>
+                                    <td>mannitol</td>
+                                    <td>Monitor ICP, fluid balance</td>
+                                    <td>Electrolyte imbalance, dehydration</td>
+                                </tr>
+                                <tr>
+                                    <td>Thrombolytics</td>
+                                    <td>alteplase (tPA)</td>
+                                    <td>Time window critical, monitor for bleeding</td>
+                                    <td>Hemorrhage, hypotension</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4><i class="fas fa-question-circle me-2"></i>Clinical Application</h4>
+                    <p><strong>Question:</strong> A patient presents with sudden onset of right-sided weakness and aphasia. Which intervention should the nurse implement first?</p>
+                    <ol type="a">
+                        <li>Obtain CT scan</li>
+                        <li>Check blood glucose</li>
+                        <li>Administer aspirin</li>
+                        <li>Complete NIH Stroke Scale</li>
+                    </ol>
+                    <div class="mt-3">
+                        <strong>Answer:</strong> B - Check blood glucose
+                        <p><em>Rationale: Hypoglycemia can mimic stroke symptoms. Blood glucose must be checked before administering tPA or other interventions to rule out stroke mimics.</em></p>
+                    </div>
+                </div>
+
+                <div class="care-plan">
+                    <h4><i class="fas fa-clipboard-check me-2"></i>Nursing Care Plan: Increased Intracranial Pressure</h4>
+                    <div class="assessment-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nursing Diagnosis</th>
+                                    <th>Interventions</th>
+                                    <th>Expected Outcomes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Risk for Decreased Intracranial Adaptive Capacity</td>
+                                    <td>
+                                        <ul>
+                                            <li>Monitor neurological status</li>
+                                            <li>Elevate head of bed 30°</li>
+                                            <li>Minimize stimulation</li>
+                                            <li>Monitor vital signs</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Stable ICP readings</li>
+                                            <li>Improved LOC</li>
+                                            <li>Stable vital signs</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Risk for Injury</td>
+                                    <td>
+                                        <ul>
+                                            <li>Implement seizure precautions</li>
+                                            <li>Maintain patent airway</li>
+                                            <li>Monitor oxygen saturation</li>
+                                            <li>Prevent Valsalva maneuver</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>No seizure activity</li>
+                                            <li>Adequate oxygenation</li>
+                                            <li>No complications</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="system-section gi-section">
+                <h2>
+                    <i class="fas fa-stomach system-icon"></i>
+                    Gastrointestinal System
+                </h2>
+
+                <div class="topic-tags">
+                    <span class="topic-tag tag-assessment">
+                        <i class="fas fa-stethoscope"></i>
+                        GI Assessment
+                    </span>
+                    <span class="topic-tag tag-intervention">
+                        <i class="fas fa-utensils"></i>
+                        Nutrition
+                    </span>
+                    <span class="topic-tag tag-medication">
+                        <i class="fas fa-pills"></i>
+                        Medications
+                    </span>
+                </div>
+
+                <div class="nclex-tip">
+                    <h4><i class="fas fa-lightbulb me-2"></i>NCLEX Focus</h4>
+                    <p>Gastrointestinal disorders are important for NCLEX because:</p>
+                    <ul>
+                        <li>Common conditions affect quality of life and recovery</li>
+                        <li>Nutritional status impacts all body systems</li>
+                        <li>Many medications affect GI function</li>
+                        <li>Early recognition prevents serious complications</li>
+                    </ul>
+                    <p><strong>Key Testing Areas:</strong></p>
+                    <ul>
+                        <li>Nutritional assessment and support</li>
+                        <li>Fluid and electrolyte balance</li>
+                        <li>GI bleeding management</li>
+                        <li>Post-operative care</li>
+                    </ul>
+                </div>
+
+                <div class="quick-reference">
+                    <h4><i class="fas fa-clipboard-list me-2"></i>Quick Reference Summary</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Priority Assessments</h5>
+                            <ul>
+                                <li>Bowel sounds</li>
+                                <li>Abdominal pain</li>
+                                <li>Nutritional status</li>
+                                <li>Output characteristics</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Warning Signs</h5>
+                            <ul>
+                                <li>Acute abdominal pain</li>
+                                <li>GI bleeding</li>
+                                <li>Severe nausea/vomiting</li>
+                                <li>Changes in output</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Key Medications</h5>
+                            <ul>
+                                <li>Antacids</li>
+                                <li>Antiemetics</li>
+                                <li>Laxatives</li>
+                                <li>Antidiarrheals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clinical-pearl">
+                    <h4><i class="fas fa-flask me-2"></i>Abdominal Assessment Guide</h4>
+                    <div class="assessment-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Normal Findings</th>
+                                    <th>Abnormal Findings</th>
+                                    <th>Nursing Implications</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Inspection</td>
+                                    <td>Symmetrical, flat</td>
+                                    <td>Distention, visible peristalsis</td>
+                                    <td>Monitor for obstruction, ascites</td>
+                                </tr>
+                                <tr>
+                                    <td>Auscultation</td>
+                                    <td>Active bowel sounds</td>
+                                    <td>Absent or hyperactive sounds</td>
+                                    <td>Assess for ileus or increased motility</td>
+                                </tr>
+                                <tr>
+                                    <td>Palpation</td>
+                                    <td>Soft, non-tender</td>
+                                    <td>Rigidity, rebound tenderness</td>
+                                    <td>Evaluate for peritonitis</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                // ... I'll continue with more GI content in the next edit ...
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

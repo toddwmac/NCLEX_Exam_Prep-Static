@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Practice Questions - NCLEX Exam Prep{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <h1>Practice Questions</h1>
+        <p class="lead">Choose a category to begin practicing NCLEX-style questions</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Medical-Surgical Nursing</h5>
+                <p class="card-text">Practice questions covering adult health and illness.</p>
+                <a href="{{ url_for('practice', topic='med-surg') }}" class="btn btn-primary">Start Practice</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Pediatric Nursing</h5>
+                <p class="card-text">Questions about child health and development.</p>
+                <a href="{{ url_for('practice', topic='pediatrics') }}" class="btn btn-primary">Start Practice</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Mental Health Nursing</h5>
+                <p class="card-text">Questions covering psychiatric and mental health.</p>
+                <a href="{{ url_for('practice', topic='mental-health') }}" class="btn btn-primary">Start Practice</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Maternal-Newborn</h5>
+                <p class="card-text">Questions about pregnancy, childbirth, and newborn care.</p>
+                <a href="{{ url_for('practice', topic='maternal') }}" class="btn btn-primary">Start Practice</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Pharmacology</h5>
+                <p class="card-text">Drug classifications, administration, and side effects.</p>
+                <a href="{{ url_for('practice', topic='pharmacology') }}" class="btn btn-primary">Start Practice</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Leadership & Management</h5>
+                <p class="card-text">Questions about nursing leadership and care management.</p>
+                <a href="{{ url_for('practice', topic='leadership') }}" class="btn btn-primary">Start Practice</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

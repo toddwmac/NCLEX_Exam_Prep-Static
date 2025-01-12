@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Practice Questions - {{ topic|title }} - NCLEX Exam Prep{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('practice') }}">Practice</a></li>
+                    <li class="breadcrumb-item active">{{ topic|title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div id="questionContainer">
+        {% for question in questions %}
+        <div class="question-card" id="question-{{ question.id }}" style="display: {% if loop.first %}block{% else %}none{% endif %};">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Question {{ loop.index }} of {{ questions|length }}</h5>
+                    <span class="badge bg-primary">{{ topic|title }}</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-4">{{ question.question }}</p>
+                    
+                    <div class="options-container">
+                        {% for option in question.options %}
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="question-{{ question.id }}" 
+                                   id="option-{{ question.id }}-{{ loop.index0 }}" value="{{ loop.index0 }}">
+                            <label class="form-check-label" for="option-{{ question.id }}-{{ loop.index0 }}">
+                                {{ option }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <button class="btn btn-primary mt-3 submit-answer" 
+                            data-question-id="{{ question.id }}" 
+                            data-correct="{{ question.correct }}" 
+                            data-explanation="{{ question.explanation|e }}">
+                        Submit Answer
+                    </button>
+
+                    <div id="feedback-{{ question.id }}" class="alert mt-3" style="display: none;">
+                        <p class="feedback-text mb-0"></p>
+                        <div class="explanation mt-2" style="display: none;">
+                            <hr>
+                            <p class="mb-0"><strong>Explanation:</strong> <span class="explanation-text"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        {% if not loop.first %}
+                        <button class="btn btn-secondary" onclick="showQuestion('{{ questions[loop.index0 - 2].id }}')">Previous</button>
+                        {% else %}
+                        <button class="btn btn-secondary" disabled>Previous</button>
+                        {% endif %}
+
+                        {% if not loop.last %}
+                        <button class="btn btn-primary" onclick="showQuestion('{{ questions[loop.index0 + 1].id }}')" id="next-{{ question.id }}" disabled>Next</button>
+                        {% else %}
+                        <button class="btn btn-success" onclick="finishPractice()" id="finish-btn" disabled>Finish</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+let answeredQuestions = new Set();
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event listeners to all submit buttons
+    document.querySelectorAll('.submit-answer').forEach(button => {
+        button.addEventListener('click', function() {
+            const questionId = this.dataset.questionId;
+            const correctOption = parseInt(this.dataset.correct);
+            const explanation = this.dataset.explanation;
+            handleAnswer(questionId, correctOption, explanation);
+        });
+    });
+});
+
+function handleAnswer(questionId, correctOption, explanation) {
+    const selectedOption = document.querySelector(`input[name="question-${questionId}"]:checked`);
+    if (!selectedOption) {
+        alert('Please select an answer first.');
+        return;
+    }
+
+    const feedbackDiv = document.getElementById(`feedback-${questionId}`);
+    const feedbackText = feedbackDiv.querySelector('.feedback-text');
+    const explanationDiv = feedbackDiv.querySelector('.explanation');
+    const explanationText = feedbackDiv.querySelector('.explanation-text');
+    const nextButton = document.getElementById(`next-${questionId}`);
+    const finishButton = document.getElementById('finish-btn');
+
+    const selectedValue = parseInt(selectedOption.value);
+    const isCorrect = selectedValue === correctOption;
+
+    // Show feedback
+    feedbackDiv.style.display = 'block';
+    feedbackDiv.className = `alert ${isCorrect ? 'alert-success' : 'alert-danger'} mt-3`;
+    feedbackText.textContent = isCorrect ? 'Correct!' : 'Incorrect. The correct answer is: ' + 
+        document.querySelector(`label[for="option-${questionId}-${correctOption}"]`).textContent.trim();
+
+    // Show explanation
+    explanationDiv.style.display = 'block';
+    explanationText.textContent = explanation;
+
+    // Disable radio buttons and submit button
+    document.querySelectorAll(`input[name="question-${questionId}"]`).forEach(input => {
+        input.disabled = true;
+    });
+    document.querySelector(`button[data-question-id="${questionId}"]`).disabled = true;
+
+    // Enable next/finish button
+    answeredQuestions.add(questionId);
+    if (nextButton) nextButton.disabled = false;
+    if (finishButton && answeredQuestions.size === {{ questions|length }}) {
+        finishButton.disabled = false;
+    }
+
+    // Highlight correct answer
+    const correctLabel = document.querySelector(`label[for="option-${questionId}-${correctOption}"]`);
+    correctLabel.style.color = '#198754';
+    correctLabel.style.fontWeight = 'bold';
+
+    // Scroll feedback into view
+    feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showQuestion(questionId) {
+    // Hide all questions
+    document.querySelectorAll('.question-card').forEach(card => {
+        card.style.display = 'none';
+    });
+    
+    // Show selected question
+    const questionCard = document.getElementById(`question-${questionId}`);
+    questionCard.style.display = 'block';
+    questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function finishPractice() {
+    window.location.href = "{{ url_for('practice') }}";
+}
+</script>
+{% endblock %} 

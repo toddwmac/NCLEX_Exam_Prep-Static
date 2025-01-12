@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}NCLEX Exam Prep - Aspen University{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <h1>Prepare for NCLEX Success</h1>
+                <p class="lead">Join Aspen University's comprehensive NCLEX preparation program designed to help nursing students achieve their goals.</p>
+                <a href="{{ url_for('practice') }}" class="btn btn-primary btn-lg mt-3">Start Your Prep Today</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-book-medical fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Practice Questions</h5>
+                    <p class="card-text">Access our extensive database of NCLEX-style questions with detailed explanations and rationales.</p>
+                    <a href="{{ url_for('practice') }}" class="btn btn-primary">Start Practice</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Study Materials</h5>
+                    <p class="card-text">Comprehensive study guides and content review aligned with the latest NCLEX test plan.</p>
+                    <a href="{{ url_for('materials') }}" class="btn btn-primary">View Materials</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-chart-line fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Progress Tracking</h5>
+                    <p class="card-text">Monitor your performance and identify areas for improvement with detailed analytics.</p>
+                    <a href="{{ url_for('progress') }}" class="btn btn-primary">View Progress</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Why Choose Aspen's NCLEX Prep?</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    Expert-written practice questions
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    Detailed rationales and explanations
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    Performance analytics and tracking
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    Mobile-friendly platform
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    Updated content aligned with NCSBN test plan
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    Personalized study recommendations
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Getting Started</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <ol class="mb-0">
+                                <li class="mb-2">Create your account to track your progress</li>
+                                <li class="mb-2">Take our diagnostic assessment</li>
+                                <li class="mb-2">Review personalized study recommendations</li>
+                                <li class="mb-2">Practice with our question bank</li>
+                                <li class="mb-2">Monitor your improvement over time</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href="{{ url_for('practice') }}" class="btn btn-primary btn-lg">Begin Your Journey</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

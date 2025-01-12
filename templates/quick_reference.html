@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}{{ reference_name|title|replace('-', ' ') }} - Quick Reference{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('materials') }}">Study Materials</a></li>
+            <li class="breadcrumb-item active">{{ reference_name|title|replace('-', ' ') }}</li>
+        </ol>
+    </nav>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" id="categoryFilter">
+                <option value="all">All Categories</option>
+                {% for category in content.keys() %}
+                <option value="{{ category }}">{{ category|title|replace('_', ' ') }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-outline-primary w-100" onclick="window.print()">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">{{ reference_name|title|replace('-', ' ') }}</h2>
+                </div>
+                <div class="card-body">
+                    {% for category, values in content.items() %}
+                    <div class="reference-category mb-4" data-category="{{ category }}">
+                        <h3 class="category-title">{{ category|title|replace('_', ' ') }}</h3>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        {% if reference_name == 'medications' %}
+                                        <th>Medication</th>
+                                        <th>Class</th>
+                                        <th>Indications</th>
+                                        <th>Side Effects</th>
+                                        <th>Nursing Considerations</th>
+                                        {% else %}
+                                        <th>Test</th>
+                                        <th>Normal Range</th>
+                                        <th>Critical Values</th>
+                                        {% endif %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item_name, data in values.items() %}
+                                    {% if reference_name == 'medications' %}
+                                    {% for med_name, med_data in data.items() %}
+                                    <tr class="searchable-row" data-search-text="{{ med_name }} {{ med_data.class }} {{ med_data.indications|join(' ') }}">
+                                        <td><strong>{{ med_name|title|replace('_', ' ') }}</strong></td>
+                                        <td>{{ med_data.class }}</td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0">
+                                                {% for indication in med_data.indications %}
+                                                <li>{{ indication }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0">
+                                                {% for effect in med_data.common_side_effects %}
+                                                <li>{{ effect }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0">
+                                                {% for consideration in med_data.nursing_considerations %}
+                                                <li>{{ consideration }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr class="searchable-row" data-search-text="{{ item_name|replace('_', ' ') }}">
+                                        <td><strong>{{ item_name|title|replace('_', ' ') }}</strong></td>
+                                        <td>
+                                            {% if data is mapping and 'range' in data %}
+                                                {{ data.range }}
+                                            {% elif data is mapping and 'normal' in data %}
+                                                {{ data.normal }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if data is mapping %}
+                                                {% if 'critical_low' in data %}
+                                                    Low: {{ data.critical_low }}<br>
+                                                {% endif %}
+                                                {% if 'critical_high' in data %}
+                                                    High: {{ data.critical_high }}
+                                                {% endif %}
+                                                {% if 'significant_elevation' in data %}
+                                                    Significant: {{ data.significant_elevation }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.reference-category { border-bottom: 1px solid #dee2e6; padding-bottom: 1rem; }
+.reference-category:last-child { border-bottom: none; }
+.category-title { color: var(--aspen-blue); margin-bottom: 1rem; }
+.table th { background-color: var(--aspen-light-gray); }
+.table td, .table th { vertical-align: middle; }
+.searchable-row.hidden { display: none; }
+.highlight { background-color: yellow; }
+
+@media print {
+    .no-print { display: none !important; }
+    .card { border: none !important; }
+    .card-body { padding: 0 !important; }
+    .table { font-size: 10pt; }
+    .table td, .table th { padding: 0.5rem; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const searchableRows = document.querySelectorAll('.searchable-row');
+    const categories = document.querySelectorAll('.reference-category');
+
+    function filterContent() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+
+        categories.forEach(category => {
+            const categoryName = category.dataset.category;
+            const shouldShowCategory = selectedCategory === 'all' || selectedCategory === categoryName;
+            category.style.display = shouldShowCategory ? 'block' : 'none';
+        });
+
+        searchableRows.forEach(row => {
+            const searchText = row.dataset.searchText.toLowerCase();
+            const category = row.closest('.reference-category');
+            const categoryName = category.dataset.category;
+            const matchesSearch = searchText.includes(searchTerm);
+            const matchesCategory = selectedCategory === 'all' || selectedCategory === categoryName;
+
+            row.classList.toggle('hidden', !(matchesSearch && matchesCategory));
+        });
+    }
+
+    searchInput.addEventListener('input', filterContent);
+    categoryFilter.addEventListener('change', filterContent);
+});
+</script>
+{% endblock %} 

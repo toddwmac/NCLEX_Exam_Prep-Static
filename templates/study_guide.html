@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}{{ guide_name|title|replace('-', ' ') }} - NCLEX Study Guide{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('materials') }}">Study Materials</a></li>
+            <li class="breadcrumb-item active">{{ guide_name|title|replace('-', ' ') }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Sidebar Navigation -->
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Study Guides</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{{ url_for('study_guide', guide_name='fundamentals') }}" 
+                       class="list-group-item list-group-item-action {% if guide_name == 'fundamentals' %}active{% endif %}">
+                        Fundamentals of Nursing
+                    </a>
+                    <a href="{{ url_for('study_guide', guide_name='med-surg') }}" 
+                       class="list-group-item list-group-item-action {% if guide_name == 'med-surg' %}active{% endif %}">
+                        Medical-Surgical Nursing
+                    </a>
+                    <a href="{{ url_for('study_guide', guide_name='pediatrics') }}" 
+                       class="list-group-item list-group-item-action {% if guide_name == 'pediatrics' %}active{% endif %}">
+                        Pediatric Nursing
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Links</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{{ url_for('practice') }}" class="list-group-item list-group-item-action">
+                        Practice Questions
+                    </a>
+                    <a href="{{ url_for('quick_reference', reference_name='lab-values') }}" class="list-group-item list-group-item-action">
+                        Lab Values
+                    </a>
+                    <a href="{{ url_for('quick_reference', reference_name='medications') }}" class="list-group-item list-group-item-action">
+                        Medications
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="h2 mb-0">{{ guide_name|title|replace('-', ' ') }}</h1>
+                    <button class="btn btn-outline-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
+                <div class="card-body study-guide-content">
+                    <div id="guide-content">
+                        {{ content|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Study Guide Content Styles */
+#guide-content {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+#guide-content h1, #guide-content h2, #guide-content h3, #guide-content h4 {
+    color: #2c3e50;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    scroll-margin-top: 80px;
+}
+
+#guide-content h1 { font-size: 2.5rem; }
+#guide-content h2 { font-size: 2rem; }
+#guide-content h3 { font-size: 1.5rem; }
+#guide-content h4 { font-size: 1.25rem; }
+
+#guide-content ul, #guide-content ol { 
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+#guide-content li { margin-bottom: 0.5rem; }
+#guide-content p { margin-bottom: 1rem; }
+
+#guide-content table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+#guide-content th, #guide-content td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+}
+
+#guide-content th {
+    background-color: var(--aspen-light-gray);
+}
+
+/* Sidebar Styles */
+@media (min-width: 768px) {
+    .card .list-group-item.active {
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .col-md-3 { display: none !important; }
+    .card { border: none !important; }
+    .card-body { padding: 0 !important; }
+    #guide-content { font-size: 12pt; }
+    a[href]:after { content: none !important; }
+}
+</style>
+{% endblock %} 

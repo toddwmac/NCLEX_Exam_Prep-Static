@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}Study Materials - NCLEX Exam Prep{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header Section -->
+    <div class="row mb-5">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4 mb-3">Study Materials</h1>
+            <p class="lead text-muted">Comprehensive study guides and review materials to help you succeed</p>
+            <hr class="my-4">
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="row">
+        <!-- Study Guides Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-book-open me-2"></i>Study Guides
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="{{ url_for('study_guide', guide_name='fundamentals') }}" 
+                           class="list-group-item list-group-item-action border-0 rounded mb-2 hover-shadow">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-primary">
+                                        <i class="fas fa-heartbeat me-2"></i>Fundamentals of Nursing
+                                    </h6>
+                                    <p class="mb-1 text-muted small">Essential nursing concepts, skills, and principles</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-primary"></i>
+                            </div>
+                        </a>
+                        <a href="{{ url_for('study_guide', guide_name='med-surg') }}" 
+                           class="list-group-item list-group-item-action border-0 rounded mb-2 hover-shadow">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-primary">
+                                        <i class="fas fa-stethoscope me-2"></i>Medical-Surgical Nursing
+                                    </h6>
+                                    <p class="mb-1 text-muted small">Comprehensive review of med-surg nursing concepts</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-primary"></i>
+                            </div>
+                        </a>
+                        <a href="{{ url_for('study_guide', guide_name='pediatrics') }}" 
+                           class="list-group-item list-group-item-action border-0 rounded mb-2 hover-shadow">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-primary">
+                                        <i class="fas fa-child me-2"></i>Pediatric Nursing
+                                    </h6>
+                                    <p class="mb-1 text-muted small">Growth, development, and pediatric care essentials</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-primary"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Reference Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt me-2"></i>Quick Reference
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="{{ url_for('quick_reference', reference_name='lab-values') }}" 
+                           class="list-group-item list-group-item-action border-0 rounded mb-2 hover-shadow">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-success">
+                                        <i class="fas fa-flask me-2"></i>Lab Values
+                                    </h6>
+                                    <p class="mb-1 text-muted small">Normal ranges and critical values</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-success"></i>
+                            </div>
+                        </a>
+                        <a href="{{ url_for('quick_reference', reference_name='medications') }}" 
+                           class="list-group-item list-group-item-action border-0 rounded mb-2 hover-shadow">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-success">
+                                        <i class="fas fa-pills me-2"></i>Medications
+                                    </h6>
+                                    <p class="mb-1 text-muted small">Common medications and nursing considerations</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-success"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Tips Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>Study Tips
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item border-0 d-flex align-items-center">
+                                    <span class="fa-stack fa-1x me-3">
+                                        <i class="fas fa-circle fa-stack-2x text-primary opacity-25"></i>
+                                        <i class="fas fa-book-reader fa-stack-1x text-primary"></i>
+                                    </span>
+                                    <span>Review one major topic each study session</span>
+                                </div>
+                                <div class="list-group-item border-0 d-flex align-items-center">
+                                    <span class="fa-stack fa-1x me-3">
+                                        <i class="fas fa-circle fa-stack-2x text-primary opacity-25"></i>
+                                        <i class="fas fa-search fa-stack-1x text-primary"></i>
+                                    </span>
+                                    <span>Use quick reference materials for rapid review</span>
+                                </div>
+                                <div class="list-group-item border-0 d-flex align-items-center">
+                                    <span class="fa-stack fa-1x me-3">
+                                        <i class="fas fa-circle fa-stack-2x text-primary opacity-25"></i>
+                                        <i class="fas fa-tasks fa-stack-1x text-primary"></i>
+                                    </span>
+                                    <span>Practice questions after each study session</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item border-0 d-flex align-items-center">
+                                    <span class="fa-stack fa-1x me-3">
+                                        <i class="fas fa-circle fa-stack-2x text-primary opacity-25"></i>
+                                        <i class="fas fa-brain fa-stack-1x text-primary"></i>
+                                    </span>
+                                    <span>Focus on understanding rationales</span>
+                                </div>
+                                <div class="list-group-item border-0 d-flex align-items-center">
+                                    <span class="fa-stack fa-1x me-3">
+                                        <i class="fas fa-circle fa-stack-2x text-primary opacity-25"></i>
+                                        <i class="fas fa-edit fa-stack-1x text-primary"></i>
+                                    </span>
+                                    <span>Create summary notes for each topic</span>
+                                </div>
+                                <div class="list-group-item border-0 d-flex align-items-center">
+                                    <span class="fa-stack fa-1x me-3">
+                                        <i class="fas fa-circle fa-stack-2x text-primary opacity-25"></i>
+                                        <i class="fas fa-chart-line fa-stack-1x text-primary"></i>
+                                    </span>
+                                    <span>Track your progress regularly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Card Styles */
+.card {
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* Hover Effects */
+.hover-shadow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+.list-group-item-action:hover i.fa-chevron-right {
+    transform: translateX(5px);
+}
+
+/* Icons */
+.fa-stack {
+    font-size: 0.8em;
+}
+
+i.fa-chevron-right {
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Typography */
+.text-muted {
+    font-size: 0.875rem;
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}
+</style>
+{% endblock %} 
